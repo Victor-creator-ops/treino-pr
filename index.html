@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Treino PR + Treino do Dia</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b0f17" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">PR</div>
+      <div>
+        <h1>Treino PR</h1>
+        <p>Cadastro + execução (Treino do Dia) + timer + histórico.</p>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <button class="btn ghost" id="btnExport">Exportar</button>
+      <label class="btn ghost file">
+        Importar
+        <input type="file" id="fileImport" accept="application/json" hidden />
+      </label>
+      <button class="btn danger" id="btnReset">Reset</button>
+    </div>
+  </header>
+
+<nav class="tabs tabs-bottom" id="bottomNav">
+  <button class="tab active" data-tab="treino">
+    <span class="tab-ico">🏋️</span>
+    <span class="tab-txt">Hoje</span>
+  </button>
+  <button class="tab" data-tab="exercicios">
+    <span class="tab-ico">📚</span>
+    <span class="tab-txt">Catálogo</span>
+  </button>
+  <button class="tab" data-tab="corrida">
+    <span class="tab-ico">🏃</span>
+    <span class="tab-txt">Corrida</span>
+  </button>
+  <button class="tab" data-tab="historico">
+    <span class="tab-ico">🗓️</span>
+    <span class="tab-txt">Histórico</span>
+  </button>
+</nav>
+
+
+  <main class="grid">
+    <!-- ===== EXERCÍCIOS ===== -->
+    <section class="card tabpane" id="tab-exercicios">
+      <h2>Novo exercício</h2>
+
+      <form id="formExercise" class="form">
+        <div class="row">
+          <div class="field">
+            <label>Exercício</label>
+            <input id="name" placeholder="Supino reto, Agachamento..." required />
+          </div>
+
+          <div class="field">
+            <label>Método</label>
+            <select id="method">
+              <option value="straight">Série reta (% do 1RM)</option>
+              <option value="dropset">Dropset (queda por etapas)</option>
+              <option value="pyramid_up">Pirâmide subida (upset)</option>
+              <option value="pyramid_down">Pirâmide descida</option>
+              <option value="amrap">AMRAP (meta de % + reps)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Seu 1RM (kg)</label>
+            <input id="oneRm" type="number" min="1" step="0.5" placeholder="ex: 100" required />
+          </div>
+
+          <div class="field">
+            <label>Arredondar</label>
+            <select id="roundTo">
+              <option value="0.5">0,5 kg</option>
+              <option value="1">1 kg</option>
+              <option value="2.5" selected>2,5 kg</option>
+              <option value="5">5 kg</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Descanso padrão (seg)</label>
+            <input id="restSec" type="number" min="10" step="5" value="90" required />
+          </div>
+
+          <div class="field">
+            <label>Notas</label>
+            <input id="notes" placeholder="ex: RPE 8, foco técnica..." />
+          </div>
+        </div>
+
+        <div class="row">
+          <button class="btn" type="submit">Salvar exercício</button>
+          <button class="btn ghost" type="button" id="btnDemo">Adicionar exemplos</button>
+        </div>
+      </form>
+
+      <hr class="sep" />
+
+      <h2>Seu catálogo</h2>
+
+      <div class="toolbar">
+        <input id="search" placeholder="Buscar exercício..." />
+        <select id="sort">
+          <option value="recent">Mais recentes</option>
+          <option value="name">Nome (A→Z)</option>
+          <option value="rm_desc">1RM (maior)</option>
+          <option value="rm_asc">1RM (menor)</option>
+        </select>
+      </div>
+
+      <div id="list" class="list"></div>
+      <p class="muted" id="emptyState">Nada cadastrado ainda. Cria o primeiro e bora.</p>
+    </section>
+
+    <!-- ===== TREINO DO DIA ===== -->
+    <section class="card tabpane hidden" id="tab-treino">
+<div class="row between">
+  <h2>Treino do Dia</h2>
+
+  <div class="row tight">
+    <input id="sessionDate" type="date" />
+    <button class="btn ghost" id="btnLoadSession">Carregar</button>
+
+    <button class="btn ghost" id="btnExportSession">Exportar treino</button>
+
+    <label class="btn ghost file">
+      Importar treino
+      <input type="file" id="fileImportSession" accept="application/json" hidden />
+    </label>
+  </div>
+</div>
+
+
+      <div class="row">
+        <div class="field">
+          <label>Adicionar exercício do catálogo</label>
+          <select id="pickExercise"></select>
+        </div>
+        <div class="field">
+          <label>&nbsp;</label>
+          <button class="btn" id="btnAddToSession">Adicionar ao treino</button>
+        </div>
+      </div>
+
+      <div id="sessionList" class="list"></div>
+      <p class="muted" id="sessionEmpty">Sem exercícios no treino do dia. Adiciona aí.</p>
+
+      <div class="row between">
+        <button class="btn danger" id="btnClearSession">Limpar treino do dia</button>
+        <button class="btn" id="btnFinishSession">Finalizar treino (salvar no histórico)</button>
+      </div>
+    </section>
+
+    <!-- ===== CORRIDA 5K ===== -->
+<section class="card tabpane hidden" id="tab-corrida">
+  <div class="row between">
+    <h2>Corrida 5K — Plano (6 semanas)</h2>
+    <div class="row tight">
+      <input id="runStartDate" type="date" />
+      <button class="btn" id="btnGenerateRunPlan">Gerar plano</button>
+    </div>
+  </div>
+
+  <p class="muted">
+    Plano run-walk progressivo pra sair de 0 → 5km com consistência.
+  </p>
+
+  <div class="row">
+    <div class="field">
+      <label>Meta 5K (data)</label>
+      <input id="runGoalDate" type="date" disabled />
+    </div>
+    <div class="field">
+      <label>Resumo</label>
+      <div class="chip" id="runSummary">Nenhum plano gerado ainda.</div>
+    </div>
+  </div>
+
+  <div id="runPlanList" class="list"></div>
+  <p class="muted" id="runEmpty">Gere o plano pra começar.</p>
+
+  <div class="row between">
+    <button class="btn danger" id="btnResetRunPlan">Reset corrida</button>
+    <button class="btn ghost" id="btnExportRunOnly">Exportar só corrida</button>
+  </div>
+</section>
+
+    <!-- ===== HISTÓRICO ===== -->
+    <section class="card tabpane hidden" id="tab-historico">
+      <h2>Histórico</h2>
+      <p class="muted">Treinos finalizados por data (com check das séries).</p>
+      <div id="historyList" class="list"></div>
+      <p class="muted" id="historyEmpty">Ainda sem treinos finalizados. Bora criar consistência.</p>
+    </section>
+
+    <!-- ===== TIMER (fixo na coluna 3 quando tiver espaço) ===== -->
+    <section class="card">
+      <h2>Timer de descanso</h2>
+
+      <div class="timer">
+        <div class="time" id="timeLabel">00:00</div>
+
+        <div class="timer-controls">
+          <button class="btn" id="btnStart">Start</button>
+          <button class="btn ghost" id="btnPause">Pause</button>
+          <button class="btn ghost" id="btnResetTimer">Reset</button>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Segundos</label>
+            <input id="timerInput" type="number" min="5" step="5" value="90" />
+          </div>
+          <div class="field">
+            <label>Presets</label>
+            <div class="preset">
+              <button class="pill" data-preset="60">60s</button>
+              <button class="pill" data-preset="90">90s</button>
+              <button class="pill" data-preset="120">120s</button>
+              <button class="pill" data-preset="180">180s</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="muted">Timer engata ao clicar em “Descansar” nas séries.</p>
+      </div>
+    </section>
+
+    <div class="timer-dock" id="timerDock">
+  <div class="dock-left">
+    <div class="dock-time" id="dockTime">00:00</div>
+    <div class="dock-sub" id="dockSub">Descanso</div>
+  </div>
+  <div class="dock-actions">
+    <button class="dock-btn" id="dockStart">▶</button>
+    <button class="dock-btn" id="dockPause">⏸</button>
+    <button class="dock-btn" id="dockReset">↺</button>
+  </div>
+</div>
+
+  </main>
+
+  <footer class="footer">
+    <span>Offline-first • dados no navegador (localStorage) • pronto pra virar PWA depois.</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+.tabs{
+  display:flex;
+  gap:10px;
+  padding:10px 22px 0;
+}
+.tab{
+  border:1px solid var(--line);
+  background: rgba(148,163,184,.08);
+  color: var(--text);
+  border-radius: 999px;
+  padding:10px 14px;
+  cursor:pointer;
+  font-weight:800;
+}
+.tab.active{
+  border-color: rgba(34,197,94,.5);
+  background: rgba(34,197,94,.14);
+}
+.hidden{display:none}
+
+.sep{
+  border:0;
+  border-top:1px solid rgba(148,163,184,.16);
+  margin:16px 0;
+}
+
+.between{justify-content:space-between}
+.tight{gap:8px}
+
+.kpi{
+  display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 0;
+}
+.kpi .chip strong{font-weight:900}
+.stage .row.tight{align-items:center}
+.pill.done{
+  border-color: rgba(34,197,94,.45);
+  background: rgba(34,197,94,.14);
+}
+.small{
+  font-size:12px;
+  color: var(--muted);
+}
+
+/* ===== Mobile-first UX upgrade ===== */
+
+:root{
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* deixa tudo mais “app” */
+body{
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card{
+  padding:14px;
+}
+
+/* inputs e botões maiores pro dedo */
+input, select{
+  padding:14px 14px;
+  border-radius: 16px;
+  font-size:16px; /* evita zoom no iOS */
+}
+
+.btn, .pill{
+  padding:12px 14px;
+  border-radius: 999px;
+}
+
+/* grid: no mobile vira 1 coluna sempre */
+.grid{
+  grid-template-columns: 1fr;
+  padding: 14px 14px 110px; /* espaço pro bottom nav + timer dock */
+}
+
+/* Tabs viram bottom nav */
+.tabs-bottom{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 12px calc(10px + var(--safe-bottom));
+  background: rgba(11,15,23,.92);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(148,163,184,.16);
+  display:flex;
+  gap:10px;
+  justify-content:space-between;
+  z-index: 20;
+}
+
+.tabs-bottom .tab{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  padding:10px 10px;
+  border-radius: 16px;
+  font-weight:900;
+}
+
+.tab-ico{font-size:16px; line-height:1}
+.tab-txt{font-size:12px; color: var(--muted)}
+
+/* ativo com mais presença */
+.tabs-bottom .tab.active{
+  background: rgba(34,197,94,.16);
+  border-color: rgba(34,197,94,.45);
+}
+.tabs-bottom .tab.active .tab-txt{
+  color: var(--text);
+}
+
+/* Topbar menos alta no celular */
+.topbar{
+  padding: 14px 14px;
+}
+.top-actions{gap:8px}
+
+/* Cards e listas mais “clean” */
+.item{
+  padding:12px;
+  border-radius: 18px;
+}
+
+.item-top{
+  align-items:center;
+}
+.item h3{
+  font-size:15px;
+  line-height:1.2;
+}
+
+/* meta chips mais compactos */
+.meta{gap:8px}
+.chip{
+  font-size:12px;
+  padding:6px 10px;
+}
+
+/* Stages com layout vertical friendly */
+.stage{
+  flex-direction:column;
+  align-items:flex-start;
+  gap:10px;
+}
+.stage .row.tight{
+  width:100%;
+  justify-content:space-between;
+}
+
+/* separador mais suave */
+.sep{
+  margin: 14px 0;
+}
+
+/* Timer dock (mini-player) */
+.timer-dock{
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 74px; /* acima da bottom nav */
+  padding: 12px 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(148,163,184,.18);
+  background: rgba(2,6,23,.65);
+  backdrop-filter: blur(10px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  z-index: 25;
+}
+
+.dock-left{display:flex; flex-direction:column; gap:2px}
+.dock-time{
+  font-variant-numeric: tabular-nums;
+  font-weight: 950;
+  font-size: 18px;
+}
+.dock-sub{font-size:12px; color: var(--muted)}
+
+.dock-actions{display:flex; gap:8px}
+.dock-btn{
+  width:44px;
+  height:44px;
+  border-radius: 14px;
+  border:1px solid rgba(148,163,184,.18);
+  background: rgba(148,163,184,.08);
+  color: var(--text);
+  font-weight: 900;
+  cursor:pointer;
+}
+
+@media (min-width: 980px){
+  /* no desktop volta seu layout 3 colunas */
+  .grid{
+    grid-template-columns: 1.1fr 1.1fr .8fr;
+    padding:16px 22px 28px;
+  }
+  .tabs-bottom{
+    position: static;
+    padding:10px 22px 0;
+    border-top: none;
+    background: transparent;
+    backdrop-filter:none;
+  }
+  .timer-dock{display:none;}
+}
