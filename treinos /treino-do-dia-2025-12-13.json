@@ -1,0 +1,214 @@
+{
+  "version": "session-v1",
+  "exportedAt": "2025-12-14T00:08:47.055Z",
+  "date": "2025-12-13",
+  "items": [
+    {
+      "id": "2760e06da2bd219b1a2f93a7",
+      "exerciseId": "63fd5bf83aa3c819b1a2b3b49",
+      "name": "Supino reto barra",
+      "method": "pyramid_up",
+      "oneRm": 60,
+      "roundTo": 2.5,
+      "restSec": 120,
+      "stages": [
+        {
+          "label": "1",
+          "pct": 0.6,
+          "reps": "12 reps",
+          "weight": 35,
+          "restSec": 120,
+          "done": false
+        },
+        {
+          "label": "2",
+          "pct": 0.7,
+          "reps": "10 reps",
+          "weight": 42.5,
+          "restSec": 120,
+          "done": false
+        },
+        {
+          "label": "3",
+          "pct": 0.8,
+          "reps": "8 reps",
+          "weight": 47.5,
+          "restSec": 120,
+          "done": false
+        },
+        {
+          "label": "4",
+          "pct": 0.85,
+          "reps": "6 reps",
+          "weight": 50,
+          "restSec": 120,
+          "done": false
+        }
+      ]
+    },
+    {
+      "id": "9900eb98292a6819b1a2fa1cf",
+      "exerciseId": "722f0e5079ead19b1a2cffb9",
+      "name": "Supino inclinado halter",
+      "method": "dropset",
+      "oneRm": 30,
+      "roundTo": 2.5,
+      "restSec": 90,
+      "stages": [
+        {
+          "label": "Topo",
+          "pct": 0.85,
+          "reps": "6 reps",
+          "weight": 25,
+          "restSec": 54,
+          "done": false
+        },
+        {
+          "label": "Drop 1",
+          "pct": 0.75,
+          "reps": "8 reps",
+          "weight": 22.5,
+          "restSec": 40,
+          "done": false
+        },
+        {
+          "label": "Drop 2",
+          "pct": 0.65,
+          "reps": "10 reps",
+          "weight": 20,
+          "restSec": 31,
+          "done": false
+        }
+      ]
+    },
+    {
+      "id": "baa766142cc6b819b1a2fbf6f",
+      "exerciseId": "1054e5f66a3a719b1a2dee72",
+      "name": "Crucifixo",
+      "method": "straight",
+      "oneRm": 60,
+      "roundTo": 2.5,
+      "restSec": 90,
+      "stages": [
+        {
+          "label": "S1",
+          "pct": 0.7,
+          "reps": "8 reps",
+          "weight": 42.5,
+          "restSec": 90,
+          "done": false
+        },
+        {
+          "label": "S2",
+          "pct": 0.7,
+          "reps": "8 reps",
+          "weight": 42.5,
+          "restSec": 90,
+          "done": false
+        },
+        {
+          "label": "S3",
+          "pct": 0.7,
+          "reps": "8 reps",
+          "weight": 42.5,
+          "restSec": 90,
+          "done": false
+        },
+        {
+          "label": "S4",
+          "pct": 0.7,
+          "reps": "8 reps",
+          "weight": 42.5,
+          "restSec": 90,
+          "done": false
+        }
+      ]
+    },
+    {
+      "id": "5a7dfdd80109c19b1a2fb9f7",
+      "exerciseId": "d890fc88ff2a919b1a2ea60f",
+      "name": "Desenvolvimento",
+      "method": "pyramid_up",
+      "oneRm": 20,
+      "roundTo": 2.5,
+      "restSec": 120,
+      "stages": [
+        {
+          "label": "1",
+          "pct": 0.6,
+          "reps": "12 reps",
+          "weight": 12.5,
+          "restSec": 120,
+          "done": false
+        },
+        {
+          "label": "2",
+          "pct": 0.7,
+          "reps": "10 reps",
+          "weight": 15,
+          "restSec": 120,
+          "done": false
+        },
+        {
+          "label": "3",
+          "pct": 0.8,
+          "reps": "8 reps",
+          "weight": 15,
+          "restSec": 120,
+          "done": false
+        },
+        {
+          "label": "4",
+          "pct": 0.85,
+          "reps": "6 reps",
+          "weight": 17.5,
+          "restSec": 120,
+          "done": false
+        }
+      ]
+    },
+    {
+      "id": "2849ad578816c19b1a2fb396",
+      "exerciseId": "bddf295c3c9de819b1a2f4e37",
+      "name": "Elevação lateral cabo",
+      "method": "straight",
+      "oneRm": 15,
+      "roundTo": 2.5,
+      "restSec": 60,
+      "stages": [
+        {
+          "label": "S1",
+          "pct": 0.7,
+          "reps": "8 reps",
+          "weight": 10,
+          "restSec": 60,
+          "done": false
+        },
+        {
+          "label": "S2",
+          "pct": 0.7,
+          "reps": "8 reps",
+          "weight": 10,
+          "restSec": 60,
+          "done": false
+        },
+        {
+          "label": "S3",
+          "pct": 0.7,
+          "reps": "8 reps",
+          "weight": 10,
+          "restSec": 60,
+          "done": false
+        },
+        {
+          "label": "S4",
+          "pct": 0.7,
+          "reps": "8 reps",
+          "weight": 10,
+          "restSec": 60,
+          "done": false
+        }
+      ]
+    }
+  ]
+}
